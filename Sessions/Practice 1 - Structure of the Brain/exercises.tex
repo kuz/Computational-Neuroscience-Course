@@ -1,0 +1,102 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{pst-plot}
+\usepackage{graphicx}
+\usepackage{endnotes}
+\usepackage{graphics}
+\usepackage{floatflt}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{pdflscape}
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0 0}}
+
+\pdfpagewidth 210mm
+\pdfpageheight 297mm 
+\setlength\topmargin{0mm}
+\setlength\headheight{0mm}
+\setlength\headsep{0mm}
+\setlength\textheight{250mm}	
+\setlength\textwidth{159.2mm}
+\setlength\oddsidemargin{0mm}
+\setlength\evensidemargin{0mm}
+\setlength\parindent{7mm}
+\setlength\parskip{0mm}
+
+\newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
+\medskip}
+
+\author{\large{Ilya Kuzovkin, Raul Vicente}}
+\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice I: Structure of the Brain}}
+
+\begin{document}
+\maketitle
+
+As you might have heard before, structure of the brain is extremely complex. There are lots of neurons next to each other, tangled with each other, forming one, almost gapless mass. In pursuit of understanding any complex system, one thing you try to learn is its structure. Once you see the structure you get insights about the purpose of the system. Same, hopefully, stands for our brain. Brain structure consist of neurons, their \emph{dentrites} (input channes), \emph{axons} (output channes) and \emph{synapses} (connections points). Eventually we would like to see this system in some structured and normalized form. The whole map of the brain (or part of it) is called \emph{connectome}. Building a connectome might reveal an information essential for understanding the inner workings of that part. 
+
+\begin{exercise}{1}{EyeWire}{0.5}
+One project aimed at creating a connectome of human brain is called EyeWire\footnote{\url{http://www.eyewire.org}}. The idea is similar to FoldIt\footnote{\url{http://fold.it}} or GalaxyZoo\footnote{\url{http://www.galaxyzoo.org}}: use human abilities and processing power to solve tasks where artificial intelligence fails. Read about this project's goals and motivation and start playing. In order to get points for this exercise complete the tutorial (first 6 cubes) and submit screenshot like the one below.
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=0.5\textwidth]{eyewire.png} 
+\end{figure}
+\end{exercise}
+
+\begin{exercise}{2}{Questionnaire}{0.5}
+By answering the following questions you will learn about some characteristics of a neuron.
+\begin{enumerate}
+\itemsep 0em
+	\item{question one}
+	\item{question two}
+	\item{...}
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}{3}{Model of a neuron}{1.5}
+Programming exercise.
+\begin{enumerate}
+\itemsep 0em
+	\item Download
+	\item Understand the data
+	\item Write a program to find X, Y, Z
+\end{enumerate}
+You can use Matlab/Octave, Python or any other programming language you like. During the course we consider Matlab our primal tool, so if you don't have any strong preferences, try using Matlab (or Octave).
+\end{exercise}
+
+\begin{exercise}{4}{Brain lesions}{0.5}
+Brain \emph{lesions} are abnormalities in the structure of the brain. Some lesions lead to interesting effect, which gives us information about functional role of the damaged region. Read about brain lesions and possible effects. Find one lesion, which triggers your interest and:
+\begin{itemize}
+\itemsep 0em
+	\item describe the nature of the lesion
+	\item find a picture of the structure it appears in
+	\item tell about its characteristics, e.g. is it temporal or permanent
+	\item describe the effect it causes
+	\item speculate on how the effect is related to the functional role of that region
+\end{itemize}
+\end{exercise}
+
+\ \\
+\ \\
+\ \\
+\ \\
+\ \\
+Please submit a \texttt{pdf} report with answers to the questions and comments about your solutions. Also submit a code for the programming exercise(s). Pack those into \texttt{zip} archive and upload to the course web page.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
