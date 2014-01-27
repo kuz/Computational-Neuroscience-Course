@@ -32,6 +32,7 @@
 
 \newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
 \medskip}
+\newcommand{\question}[2]{\setlength\parindent{0mm}\ \\$\mathbf{Q_#1:}$ #2\ \\}
 
 \author{\large{Ilya Kuzovkin, Raul Vicente}}
 \title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice II: Data Analysis - Continuous Data}}
@@ -39,11 +40,41 @@
 \begin{document}
 \maketitle
 
-\begin{exercise}{1}{...}{1}
-...
+\begin{exercise}{1}{Questionnaire}{0.5}
+\question{1}{What information you loose if you choose 300ms window for Fourier transform?}
+\end{exercise}
+
+\begin{exercise}{2}{DFT}{0.5}
+Play discrete Fourier transform on paper
+\end{exercise}
+
+\begin{exercise}{3}{Frequency Analysis}{1.5}
+In this exercise we ... \\
+\textbf{Get data from Andero}
+\begin{enumerate}
+\itemsep 0em
+	\item Download and study data, you have two conditions
+	\item Do Fourier and plot frequency distributions for each condition
+	\item What difference do you see, why?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}{4*}{Exponent}{0.5}
+Estimate the exponent of the slope in the frequency distributions you got in the previous exercise. This is important because...
+\end{exercise}
+
+\begin{exercise}{5}{Correlation}{0.5}
+Compute correlation between two EEG channels.
+\end{exercise}
+
+\begin{exercise}{6}{Evoked Potential}{0.5}
+Average over many runs to see that only then stuff becomes visible
 \end{exercise}
 
 
+\begin{exercise}{7}{???}{0.5}
+Discuss something
+\end{exercise}
 \ \\
 \ \\
 \ \\

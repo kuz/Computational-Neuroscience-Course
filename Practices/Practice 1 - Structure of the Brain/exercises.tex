@@ -32,6 +32,8 @@
 
 \newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
 \medskip}
+\newcommand{\question}[2]{\setlength\parindent{0mm}\ \\$\mathbf{Q_#1:}$ #2\ \\}
+
 
 \author{\large{Ilya Kuzovkin, Raul Vicente}}
 \title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice I: Structure of the Brain}}
@@ -50,24 +52,63 @@ One project aimed at creating a connectome of human brain is called EyeWire\foot
 \end{exercise}
 
 \begin{exercise}{2}{Questionnaire}{0.5}
-By answering the following questions you will learn about some characteristics of a neuron.
-\begin{enumerate}
-\itemsep 0em
-	\item{question one}
-	\item{question two}
-	\item{...}
-\end{enumerate}
+\question{1}{Question one}
+\question{2}{Question two}
+\question{3}{...}
 \end{exercise}
 
 \begin{exercise}{3}{Model of a neuron}{1.5}
-Programming exercise.
+There are lot of different types of neurons in our nervous system. They have different size, structure and functional role. Let us have a look at some of them:\\
+\ \\
+\begin{tabular}{p{3.7cm} p{3.7cm} p{3.7cm} p{3.7cm}}
+\includegraphics[width=0.25\textwidth]{pyramidal2.png} &
+\includegraphics[width=0.25\textwidth]{purkinje.png} &
+\includegraphics[height=0.25\textwidth]{spindle.png} &
+\includegraphics[width=0.25\textwidth]{amacrine.png}\\
+
+\begin{center}\textbf{Pyramidal cell in layer 2 or 3}\end{center}&
+\begin{center}\textbf{Purkinje cell}\end{center}&
+\begin{center}\textbf{Spindle neuron}\end{center}&
+\begin{center}\textbf{Amacrine cell}\end{center} \\
+
+\includegraphics[width=0.25\textwidth]{pyramidal5.png} &
+\includegraphics[width=0.25\textwidth]{bascet.png} &
+\includegraphics[height=0.25\textwidth]{sensory.png} &
+ \\
+
+\begin{center}\textbf{Pyramidal cell in layer 5}\end{center}&
+\begin{center}\textbf{Bascet}\end{center}&
+\begin{center}\textbf{Sensory}\end{center}&
+\begin{center}\textbf{}\end{center} \\
+\end{tabular}
+
+
+In the \texttt{data} folder of this assignment you will find three \texttt{.swc} files. Each file describes reconstructed structure of a neuron. Neuron can be classified by different parameters, such as size, bifurcation, size of some, etc. In general this task is quite hard\footnote{M. Bota, L. W. Swanson, \textbf{The neuron classification problem}, 2007, 
+\url{http://www.sciencedirect.com/science/article/pii/S0165017307000768}}. When looked at, different types of neurons have distinguishable shapes. This is what we will try to use in this exercise. Your task is to plot neurons from the data files and guess which of the above-mentioned types each of them belongs to.
 \begin{enumerate}
-\itemsep 0em
-	\item Download
-	\item Understand the data
-	\item Write a program to find X, Y, Z
+	\item Have a look inside an \texttt{.swc} file. Each line describes small piece of the neuron (\emph{compartment}), space-separated values are: 
+	\begin{enumerate}
+		\item ID of the compartment
+		\item Type of the compartment:
+		\begin{enumerate}
+			\item[0] -- undefined
+			\item[1] -- soma
+			\item[2] -- axon
+			\item[3] -- basal dendrite
+			\item[4] -- apical dendrite
+		\end{enumerate}
+		\item X coordinate (in $\mu$m)
+		\item Y coordinate
+		\item Z coordinate
+		\item Radius of the compartment
+		\item ID of parent compartment (-1 for root compartment)
+	\end{enumerate}
+	\item Import coordinate data into your program (or \texttt{Matlab}, \texttt{R} environment)
+	\item Plot data in 3D (for example using \texttt{scatter3} in \texttt{Matlab})
+	\item Look at resulting 3D image an try to guess type of the neuron
 \end{enumerate}
-You can use Matlab/Octave, Python or any other programming language you like. During the course we consider Matlab our primal tool, so if you don't have any strong preferences, try using Matlab (or Octave).
+\ \\
+In your report please tell type of neuron for each of the files, include visualizations and the code to reproduce them. You can use \texttt{Matlab/Octave}, \texttt{Python} or any other programming language you like. During the course we consider \texttt{Matlab} our primal tool, so if you don't have any strong preferences, try using \texttt{Matlab/Octave}.
 \end{exercise}
 
 \begin{exercise}{4}{Brain lesions}{0.5}

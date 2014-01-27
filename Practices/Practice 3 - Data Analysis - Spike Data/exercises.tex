@@ -32,16 +32,66 @@
 
 \newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
 \medskip}
+\newcommand{\question}[2]{\setlength\parindent{0mm}\ \\$\mathbf{Q_#1:}$ #2\ \\}
 
 \author{\large{Ilya Kuzovkin, Raul Vicente}}
-\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice III: Data Analysis - Spike Data}}
+\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice III: Data Analysis - Spiking Data}}
 
 \begin{document}
 \maketitle
 
-\begin{exercise}{1}{...}{1}
-...
+\begin{exercise}{1}{Questionnaire}{0.5}
+\question{1}{...}
 \end{exercise}
+
+\begin{exercise}{2}{Spikes}{0.5}
+Some theoretical exercise
+\end{exercise}
+
+\begin{exercise}{3}{Extract orientation}{1.5}
+Some introductory text ...\\
+Data description \url{http://crcns.org/files/data/lgn-1/crcns_lgn-1_data_description.pdf}\\
+
+These files contain the spiking responses of LGN neurons in the mouse to 
+drifting gratings. Each file contains the spiking responses and stimulus 
+specifications for a single neuron. 
+ 
+These files are in the Matlab format. Loading one in MatLab will bring a structure 
+called mlgn into MatLab's memory. The structure has two elements: 
+ 
+spktimes: MxNxT size array, where M is the stimulus number, N is the repeat 
+number and T is time in milliseconds. Value of 1 in the array indicates 
+a spike. Value of 0 indicates no spike. The order of the presentation 
+of the stimulus repeats is not provided. 
+ 
+stim: M size array, where M is the number of stimulus conditions. 
+stim for this dataset indicates the contrast used, spatial frequency, 
+temporal frequency, stimulus duration (in seconds), prestimulus 
+duration, poststimulus duration, the original scanrate, orientation, and 
+whether muscimol was present in V1. 
+\ \\
+
+
+
+Data \url{http://crcns.org/data-sets/lgn/lgn-1/about}\\
+Article \url{http://www.jneurosci.org/content/33/26/10616.full.pdf}
+\begin{enumerate}
+\itemsep 0em
+	\item Download and understand data
+	\item Extract orientation from data
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}{4*}{Where is the rat?}{1}
+Data \url{http://crcns.org/data-sets/hc/hc-3/about-hc-3}\\
+Description \url{http://crcns.org/files/data/hc3/crcns-hc3-data-description.pdf}\\
+Where is rat at time moment 12:09?
+\end{exercise}
+
+\begin{exercise}{5}{???}{0.5}
+Discuss something
+\end{exercise}
+
 
 
 \ \\
