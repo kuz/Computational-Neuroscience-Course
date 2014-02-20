@@ -81,11 +81,20 @@ Your task is to calculate correlation between the channels \texttt{AF3} and \tex
 \begin{exercise}{3*}{Graph of correlations}{0.5}
 Now compute pairwise correlations between all channels. Create a graph of correlations, where
 \begin{itemize}
+\itemsep 0em
 	\item Nodes are channels.
-	\item Two nodes are connected if correlation between corresponding channels is $\geq 0.9$.
+	\item Two nodes are connected if correlation between corresponding channels is $\geq 0.9$ (you can play with this parameter).
 \end{itemize}
-Plot correlations as a heatmap. Do you observe something interesting from graph or from the plot?
-\paragraph{Hint.} In Matlab use \texttt{image} or \texttt{surf} function for plotting.
+Your task is to visualize this correlation graph. In the \texttt{data} folder you can find file \texttt{channels.txt} with the 3D locations of the electrodes. File columns are:
+\begin{enumerate}
+\itemsep 0em
+	\item ID of the electrode.
+	\item Name of the elecrode.
+	\item X coordinate.
+	\item Y coordinate.
+	\item Z coordinate.
+\end{enumerate}
+One way to draw such a graph is to create a 3D plot with dots representing electrodes and add correlations as lines between the dots. There might exists specific tools for graph visualization in Matlab, you can try to find one and use that.
 \end{exercise}
 
 
@@ -96,13 +105,10 @@ Plot correlations as a heatmap. Do you observe something interesting from graph 
 The most popular operation that you can do with continuous brain data is converting it from the \emph{time domain} to the \emph{frequency domain}. Due to the fact that any function can be represented as a sum of sinusoids we can decompose our signal into such sinusoids and observe from which frequency components it consists. In terms of the brain data such transformation makes particular sense, because of the \emph{brain rhythms} -- different frequencies of the firings of the neurons are related to the different kinds of mental activity\footnote{\url{http://en.wikipedia.org/wiki/Electroencephalography\#Wave_patterns}}.
 
 \ \\
-In this exercise we will see how \emph{alpha wave} emerges when the test subject's eyes are closed. In the \texttt{data} folder you can find two files: \texttt{eyes\_open.csv} and \texttt{eyes\_closed.csv}. The data is recorded from the channel \texttt{Pz}. One row contains 4 seconds of the signal, sampling rate is 512. Each file has 15 recordings.
+In this exercise we will plot \emph{power spectrum} and see how \emph{alpha wave} emerges when the test subject's eyes are closed. In the \texttt{data} folder you can find two files: \texttt{eyes\_open.csv} and \texttt{eyes\_closed.csv}. The data is recorded from the channel \texttt{Pz}. One row contains 4 seconds of the signal, sampling rate is 512. Each file has 15 recordings.
+
 \ \\
-\ \\
-\ \\
-\ \\
-\ \\
-Your task is to perform Fourier analysis on both datasets and compare the results. Do it as follows:
+Your task is to perform Fourier analysis on both datasets, plot power spectra and compare the results. Do it as follows:
 \begin{enumerate}
 	\item Plot some of the signals just to see how they look like.
 	\item For each recorded signal (2048 data points):
@@ -159,7 +165,7 @@ where
 Let us say that you would like to know contribution of sinusoidal components of frequencies from 0 to 100 Hz. Then you should apply this equation 101 times. As a result you will get 101 complex numbers.
 To extract amplitude from these numbers use the following equation on each of them:
 $$A_f = \frac{\sqrt{\text{Re}(X_f)^2 + \text{Im}(X_f)^2}}{2N}$$
-Now you have all the contributions and you have completed Discrete Fourier Transform of your signal. For example if 7th number is "25" then it means that the amplitude of the sinusoidal component with frequency 7 Hz is 25.
+Now you have all the contributions and you have completed Discrete Fourier Transform of your signal. For example if 7th number is "25" then it means that the amplitude of the sinusoidal component with frequency 7$*$df Hz is 25.
 
 \ \\
 Here you see a curve, that is a sum of three sinusoids. Your task is to apply DFT and find out frequencies and amplitudes of those components. You can find data points for this curve in the file \texttt{curve.csv}.
@@ -176,7 +182,7 @@ Here you see a curve, that is a sum of three sinusoids. Your task is to apply DF
 \begin{exercise}{6*}{Epilepsy}{0.5}
 In the folder \texttt{data/epilepsy} you have two data files: \texttt{sz4\_pre.dat} and \texttt{sz4\_ict.dat}. This data was recorded using ECoG\footnote{http://en.wikipedia.org/wiki/Electrocorticography} array. The file with the suffix \texttt{\_pre} is recorded before the seizure and the \texttt{\_ict} file is recorded during the epilepsy seizure. Read the \texttt{README.txt} file for the description of the data. Your task is to perform Fourier analysis on both files and see how brain activity changes during the epilepsy seizure.
 \paragraph{Hint.} Reuse the code from the exercise 4.
-\paragraph{Hint.} The data has readings from the 76 electrodes, take FT of each of them and then average.
+\paragraph{Hint.} The data has readings from the 76 electrodes. First make Fourier transform on each of them separately, then compute the power spectra (each one separately) and then compute the average and plot that.
 \end{exercise}
 
 
