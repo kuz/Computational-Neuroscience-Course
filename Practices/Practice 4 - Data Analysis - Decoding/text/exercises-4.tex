@@ -72,6 +72,41 @@ Where is rat at time moment 12:09?
 Discuss something
 \end{exercise}
 
+\begin{exercise}{3}{Extract orientation}{1.5}
+Some introductory text ...\\
+Data description \url{http://crcns.org/files/data/lgn-1/crcns_lgn-1_data_description.pdf}\\
+
+These files contain the spiking responses of LGN neurons in the mouse to 
+drifting gratings. Each file contains the spiking responses and stimulus 
+specifications for a single neuron. 
+ 
+These files are in the Matlab format. Loading one in MatLab will bring a structure 
+called mlgn into MatLab's memory. The structure has two elements: 
+ 
+spktimes: MxNxT size array, where M is the stimulus number, N is the repeat 
+number and T is time in milliseconds. Value of 1 in the array indicates 
+a spike. Value of 0 indicates no spike. The order of the presentation 
+of the stimulus repeats is not provided. 
+ 
+stim: M size array, where M is the number of stimulus conditions. 
+stim for this dataset indicates the contrast used, spatial frequency, 
+temporal frequency, stimulus duration (in seconds), prestimulus 
+duration, poststimulus duration, the original scanrate, orientation, and 
+whether muscimol was present in V1. 
+\ \\
+
+
+
+Data \url{http://crcns.org/data-sets/lgn/lgn-1/about}\\
+Article \url{http://www.jneurosci.org/content/33/26/10616.full.pdf}
+\begin{enumerate}
+\itemsep 0em
+	\item Download and understand data
+	\item Extract orientation from data
+\end{enumerate}
+\end{exercise}
+
+
 \ \\
 \ \\
 \ \\
