@@ -69,6 +69,7 @@ Before we continue let us go through vocabulary:
 	\item The model is created from examples. Those are instances for which the class is known. Set of such examples is called \textbf{training set}, because we train our model on it.
 	\item \textbf{Test set} is another set of instances, for which we also know the true class, but we do not give it to the model. We give the data (without the class) to the model and we ask the model to guess the class of the each instance.
 	\item We can see how many instances from the test set model has identified correctly and the rate $$\displaystyle\frac{\text{Number of correctly classified instances}}{\text{Total number of instances}}$$ is called \textbf{accuracy}\footnote{Accuracy is a naive way to measure performance of the model. Read about \emph{precision} and \emph{recall} here \url{http://en.wikipedia.org/wiki/Precision_and_recall}} and it used to evaluate model's performance.
+	\item \textbf{Principle Component Analysis} (PCA) is a method, which allows to replace existing features by principle components. The important property of the principle components is that the first component has the largest possible variance, the second one is orthogonal to the first one and again, has the second largest variance, and so on. As a result you usually can reduce the dimensionality of your feature space by using only $N$ first components as they already describe all the variance in your data and you do not need the rest of them.
 \end{itemize}
 
 
@@ -136,15 +137,13 @@ Our goal is to to predict position of the rat only by looking by the features ex
 In your report describe the logic behind the operations you are performing, results, plots and interpretations.
 \end{exercise}
 
-\pagebreak
-
 Previous exercises from this and previous sessions might have left you with a feeling that it is quite easy to achieve a result in neuroscience: you just think a little bit about the representation of your data, then use bunch of tools and the result is in your hands. The next exercise will give you the real feeling and give an opportunity to tackle with a problem.
 
 %
 % fMRI
 %
 \begin{exercise}{3}{PCA on fMRI data}{1+1*}
-The most spatially precise way of measuring brain activity is the Functional Magnetic Resonance Imaging (fMRI)\footnote{\url{http://en.wikipedia.org/wiki/Functional_magnetic_resonance_imaging}}. Things like reconstruction a video stream form the visual cortex has been attempted and successed\footnote{See for youself: \url{http://www.youtube.com/watch?v=nsjDnYxJ0bo}}.
+The most spatially precise non-invasive way of measuring brain activity is the Functional Magnetic Resonance Imaging (fMRI)\footnote{\url{http://en.wikipedia.org/wiki/Functional_magnetic_resonance_imaging}}. Things like reconstruction a video stream form the visual cortex has been attempted and successed\footnote{See for youself: \url{http://www.youtube.com/watch?v=nsjDnYxJ0bo}}.
 
 \begin{wrapfigure}{r}{0.3\textwidth}
 	\centering
