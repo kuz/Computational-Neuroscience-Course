@@ -69,7 +69,7 @@ Before we continue let us go through vocabulary:
 	\item The model is created from examples. Those are instances for which the class is known. Set of such examples is called \textbf{training set}, because we train our model on it.
 	\item \textbf{Test set} is another set of instances, for which we also know the true class, but we do not give it to the model. We give the data (without the class) to the model and we ask the model to guess the class of the each instance.
 	\item We can see how many instances from the test set model has identified correctly and the rate $$\displaystyle\frac{\text{Number of correctly classified instances}}{\text{Total number of instances}}$$ is called \textbf{accuracy}\footnote{Accuracy is a naive way to measure performance of the model. Read about \emph{precision} and \emph{recall} here \url{http://en.wikipedia.org/wiki/Precision_and_recall}} and it used to evaluate model's performance.
-	\item \textbf{Principle Component Analysis} (PCA) is a method, which allows to replace existing features by principle components. The important property of the principle components is that the first component has the largest possible variance, the second one is orthogonal to the first one and again, has the second largest variance, and so on. As a result you usually can reduce the dimensionality of your feature space by using only $N$ first components as they already describe all the variance in your data and you do not need the rest of them.
+	\item \textbf{Principle Component Analysis} (PCA) is a method, which allows to replace existing features by principle components. Each component is a linear combination of original features. The important property of the principle components is that the first component has the largest possible variance, the second one is orthogonal to the first one and again, has the second largest variance, and so on. As a result you usually can reduce the dimensionality of your feature space by using only $N$ first components as they already describe all the variance in your data and you do not need the rest of them.
 \end{itemize}
 
 
@@ -157,7 +157,7 @@ The fMRI data is rather massive: at each moment of time (which is 1-2 seconds) t
 
 In this exercise we will use the dataset\footnote{\url{https://crcns.org/data-sets/vc/vim-1/about-vim-1}}, where the region of the visual cortex ($\approx$25,000 voxels) was recorded while the test subject was looking at different images (see Figure \ref{fig:examplepic} for an example). The dataset consists of 1750 training instances and 120 test (validation) instances. We will be working with pre-processed data, which, nevertheless, has the size of 700\texttt{MB} (the orignial data is about 10\texttt{GB}).
 
-In this exercise we apply PCA on this data to reduce it. The funny thing is, that you actually can throw more than half of it away without loosing any information at all.
+In this exercise we apply PCA on this data to reduce it. The funny thing is, that you actually can throw more than half of it away without loosing any information at all. 
 
 The codebase in the file \texttt{codebase4.m} will get you started. Go through the code and understand the logic of what is happening. Describe this logic in your report. Finish the code and run it, add pictures, plots and results what you get to the report.
 
@@ -191,9 +191,6 @@ If you use Octave then you will need to install \texttt{statistics}\footnote{\ur
 > pkg install -forge statistics
 \end{verbatim}
 
-
-
-
 \end{exercise}
 
 
@@ -204,9 +201,9 @@ Your task is to take the data from the previous session and attempt to once more
 \begin{enumerate}
 \itemsep 0em
 	\item Take the data and look at it. Read the description, study the values, etc. until you understand it.
-	\item Think how you can convert spiking data into features.
-	\item Extract the features you came up with and create your instances.
-	\item Create list of classes (12 orientations in this case).
+	\item Take features are average spiking rates of neurons, so
+	\item one instance will consist of 72 numbers. Spiking rate of each of the neurons during one trial. The minimal number of trial per neuron is 5, so you will have 5 trials per each stimulus.
+	\item You will have 12 classes (12 orientations).
 	\item Split dataset into training and test sets.
 	\item Create a model using training set.
 	\item Evaluate it's performance on the test set.
