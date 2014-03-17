@@ -178,8 +178,8 @@ testsamples    = % ... YOUR CODE HERE ...
 % PCA can do and how it is useful in cases like ours.
 
 % I will demonstate PCA on the images we have in our dataset
-% we put all image together
-images = reshape(stimTrn, 1750, 128*128);
+% we put all images together
+images = [reshape(stimTrn, 1750, 128*128); reshape(stimVal, 120, 128*128)];
 
 % and train PCA on it (it will take minute or two)
 [imgcoef, imgscore, imgvariance] = princomp(images);
