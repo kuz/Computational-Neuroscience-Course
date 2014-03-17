@@ -164,7 +164,7 @@ where
 \end{itemize}
 Let us say that you would like to know contribution of sinusoidal components of frequencies from 0 to 100 Hz. Then you should apply this equation 101 times. As a result you will get 101 complex numbers.
 To extract amplitude from these numbers use the following equation on each of them:
-$$A_f = \frac{\sqrt{\text{Re}(X_f)^2 + \text{Im}(X_f)^2}}{2N}$$
+$$A_f = 2\frac{\sqrt{\text{Re}(X_f)^2 + \text{Im}(X_f)^2}}{N}$$
 Now you have all the contributions and you have completed Discrete Fourier Transform of your signal. For example if 7th number is "25" then it means that the amplitude of the sinusoidal component with frequency 7$*$df Hz is 25.
 
 \ \\
