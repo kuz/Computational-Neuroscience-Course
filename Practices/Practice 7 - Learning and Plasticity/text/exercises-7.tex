@@ -1,0 +1,135 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{pst-plot}
+\usepackage{graphicx}
+\usepackage{endnotes}
+\usepackage{graphics}
+\usepackage{floatflt}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{pdflscape}
+ \usepackage{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0 0}}
+
+\pdfpagewidth 210mm
+\pdfpageheight 297mm 
+\setlength\topmargin{0mm}
+\setlength\headheight{0mm}
+\setlength\headsep{0mm}
+\setlength\textheight{250mm}	
+\setlength\textwidth{159.2mm}
+\setlength\oddsidemargin{0mm}
+\setlength\evensidemargin{0mm}
+\setlength\parindent{7mm}
+\setlength\parskip{0mm}
+
+\newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
+\medskip}
+\newcommand{\question}[2]{\setlength\parindent{0mm}\ \\$\mathbf{Q_{#1}:}$ #2\ \\}
+
+\author{\large{Ilya Kuzovkin, Raul Vicente}}
+\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice VII: Learning and Plasticity}}
+
+\begin{document}
+\maketitle
+
+
+%
+% Intro
+%
+\ \\
+
+\ \\
+\textbf{Request:} Please record the time you will spend of this homework and add it to the report. This is just for me to balance the amount and the difficulty level of the exercises.
+
+%
+% 
+%
+\begin{exercise}{1}{Questionnaire (based on the lecture slides)}{1}
+\question{1}{Which biological processes could facilitate plasticity?}
+\question{2}{Explain three types of learning.}
+\question{3}{Why production of new neurons is not a good explanation for most of the learning and memory?}
+\question{4}{What is the main mechanism behind the Hebbian learning? (use words \emph{synapse, strength} in the answer)}
+\question{5}{Explain one measure to estimate the strength of the synapse?}
+\question{6}{What is the effect we observe in Long-term potentiation (LTP)?}
+\question{7}{Describe three characteristics that make LTP a good candidate for a mechanism of synaptic memory.}
+\question{8}{How long-term depression (LTD) is related to LTP? What LTD can be useful for?}
+\question{9}{What is the role of a NMDA receptor? What will happen if you block NMDA channels with drugs?}
+\question{10}{Explain classical conditioning on the example of this video \url{https://www.youtube.com/watch?v=Eo7jcI8fAuI} (use words \emph{neutral stimulus, unconditioned stimulus, conditioned stimulus, conditioned response})}
+\end{exercise}
+
+
+%
+% 
+%
+\begin{exercise}{2}{Unsupervised learning with Oja (upgraded Hebbian) rule}{1.5}
+Donald Hebb, after whom the learning is named, stated in 1949: "When an axon of cell A is near enough to excite a cell B and repeatedly takes part in firing it, some growth process or metabolic changes take place in one or both cells such that A's efficiency as one of the cells firing B, is increased." The classical Hebb's rule is
+
+$$w_{t+1, i} = w_{t, i} + \alpha (x_{t, i} y)$$
+\ \\
+In this exercise we will see how an slightly modified Hebbian rule is able to learn something about the data. The modification we will use is called \emph{Oja learning rule} and it says that synaptic weights evolve over time according to the following rule:
+$$w_{t+1, i} = w_{t, i} + \alpha (x_{t, i} y - y^2 w_{t,i})$$
+where $w_i$ is the weight of synapse $i$, $t$ is time, $\alpha$ is the learning rate and, $x_{t, i}$ is the activity of synapse $i$ at time $t$, $y_t$ is the output of the postsynaptic neuron at time $t$.
+
+\ \\
+In this case we will see how one neuron receiving input from two synapses learns the structure of the incoming data by modifying its synaptic weights.
+
+\ \\
+Your task is to:
+\begin{itemize}
+	\item Fill in the usual Hebbian learning rule on line 48 of the \texttt{exercise3.m} file.
+	\item Run the code 3 times and look at the evolution of the weights (left plot on Figure 1) and the length of the weight vector (right plot Figure 1). Report:
+		\begin{itemize}
+			\item The initial synaptic weights (green triangle)
+			\item The final synaptic weights (red asterisk)
+			\item The length of the length vector 
+		\end{itemize}
+	\item Now fill in the Oja's learning rule on line 51 of the \texttt{exercise3.m} file.
+	\item Run it again and report the same variables as previously:
+		\begin{itemize}
+			\item The initial synaptic weights (green triangle)
+			\item The final synaptic weights (red asterisk)
+			\item The length of the length vector 
+		\end{itemize}
+	\item Compare the length of the weight vector for the two learning rules. Why the Oja's rule is more realistic biologically.
+	\item Now have a look at Figure 2. How the weight vector relates to the data?
+\end{itemize}
+\end{exercise}
+
+%
+% 
+%
+\begin{exercise}{3}{Conditioning in everyday life}{0.5}
+The effects of conditioning can be observed in our everyday life. You task is to find a real-life examples of:
+\begin{enumerate}
+	\item Advertisement where they aim to associate the product with some unconditioned stimulus. Explain it.
+	\item Training using operant conditioning. What is the desired change in behavior? What are the punishment/reinforcement stimuli used.
+\end{enumerate}
+\end{exercise}
+
+\ \\
+\ \\
+\ \\
+\ \\
+\ \\
+Please submit a PDF report with answers to the questions and comments about your solutions. You report should contain figures, explanations, the essential parts of the code you have produced, etc. If the code is too massive you can add it to the submission and upload everything as a \texttt{zip} archive. But single PDF is preferred.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
