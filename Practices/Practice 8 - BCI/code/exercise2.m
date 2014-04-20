@@ -15,8 +15,8 @@ clf
 %   train_dg   - Finger flexion data we use for training, 5 fingers, 400 seconds
 %   test_data  - ECoG data we use for testing, 64 channels, 200 seconds
 %   test_dg    - Finger flexion data we use for testing, 5 fingers, 200 seconds
-load sub1_comp
-load sub1_testlabels
+load data/sub1_comp
+load data/sub1_testlabels
 
 
 %% Plot some of it to get an idea how it looks
@@ -43,22 +43,34 @@ training_labels_ft   = [];
 % perform DFT on training data
 for w = 1:window_size:size(train_data(:, finger), 1)
     
-    % define start end points of the window
+    % define start and end points of the window
     window_start = w;
     window_end   = w + window_size - 1;
     
-    % take signal from the window
-    signal = train_data(window_start:window_end, finger);
+    % we are going to make FFT on all channels
+    instance = [];
+    for channel = 1:size(train_data, 2)
+        
+        % take signal from the window on current channel
+        signal = train_data(window_start:window_end, channel);
+        
+        % perform DFT on this signal
+        pow = abs(fft(signal));
+        
+        % create three features
+        %   1-60 Hz average powers
+        %   61-100 Hz average powers
+        %   100-200 Hz average powers
+        % and put them into a feature vector
+        features = [mean(pow(1:60)), mean(pow(60:100)), mean(pow(100:200))];
+        
+        % and glue features form this channel to the instance, which will
+        % describe current time window
+        instance = [instance features];
+    end
     
-    % perform DFT on this signal
-    pow = abs(fft(signal));
-    
-    % create three features
-    %   1-60 Hz average powers
-    %   61-100 Hz average powers
-    %   100-200 Hz average powers
-    % and put them into a feature vector
-    training_data_ft = [training_data_ft; mean(pow(1:60)), mean(pow(60:100)), mean(pow(100:200))];
+    % add newly created instance to the training set
+    training_data_ft = [training_data_ft; instance];
     
     % store corresponding label into vector with training labels
     training_labels_ft = [training_labels_ft; mean(train_dg(window_start:window_end, finger))];
@@ -71,22 +83,34 @@ test_labels_ft   = [];
 % perform DFT on test data
 for w = 1:window_size:size(test_data(:, finger), 1)
     
-    % define start end points of the window
+    % define start and end points of the window
     window_start = w;
     window_end   = w + window_size - 1;
     
-    % take signal from the window
-    signal = test_data(window_start:window_end, finger);
+    % we are going to make FFT on all channels
+    instance = [];
+    for channel = 1:size(test_data, 2)
+        
+        % take signal from the window on current channel
+        signal = test_data(window_start:window_end, channel);
+        
+        % perform DFT on this signal
+        pow = abs(fft(signal));
+        
+        % create three features
+        %   1-60 Hz average powers
+        %   61-100 Hz average powers
+        %   100-200 Hz average powers
+        % and put them into a feature vector
+        features = [mean(pow(1:60)), mean(pow(60:100)), mean(pow(100:200))];
+        
+        % and glue features form this channel to the instance, which will
+        % describe current time window
+        instance = [instance features];
+    end
     
-    % perform DFT on this signal
-    pow = abs(fft(signal));
-    
-    % create three features
-    %   1-60 Hz average powers
-    %   61-100 Hz average powers
-    %   100-200 Hz average powers
-    % and put them into a feature vector
-    test_data_ft = [test_data_ft; mean(pow(1:60)), mean(pow(60:100)), mean(pow(100:200))];
+    % add newly created instance to the test set
+    test_data_ft = [test_data_ft; instance];
     
     % store corresponding label into vector with training labels
     test_labels_ft = [test_labels_ft; mean(test_dg(window_start:window_end, finger))];
