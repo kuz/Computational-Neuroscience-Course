@@ -2,7 +2,15 @@ Computational Neuroscience Course
 =================================
 
 This repository contains materials and codebase for the Computation Neuroscience course at the Institute of Computer Science of University of Tartu.
-https://courses.cs.ut.ee/2014/neuro/spring/Main/HomePage
+https://courses.cs.ut.ee/2015/neuro/spring/Main/HomePage
+
+2015
+----
+Second run of the course. Changed order of practice sessions, updated exercies.
+
+2014
+----
+First version of the course materials
 
 Copyright
 ---------
