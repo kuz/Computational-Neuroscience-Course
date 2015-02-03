@@ -6,7 +6,7 @@ https://courses.cs.ut.ee/2015/neuro/spring/Main/HomePage
 
 2015
 ----
-Second run of the course. Changed order of practice sessions, updated exercies.
+Second run of the course. Changed order of practice sessions, updated exercises.
 
 2014
 ----
