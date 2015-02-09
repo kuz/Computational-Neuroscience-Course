@@ -75,13 +75,24 @@ In this course we will use Matlab programming language. The choice is due to the
 %
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.8\textwidth]{matlab.png} 
+   \includegraphics[width=0.95\textwidth]{matlab.png} 
    \caption{Matlab main window}
    \label{fig:matlabgui}
 \end{figure}
 On Figure \ref{fig:matlabgui} you can see Matlab main window. For Matlab it is very important to know which directory is the current \emph{working directory}. So the first order of business for you is to pick a directory (in the upper part of the screen) where you will complete this practice exercises. Once your unpack the \texttt{01 - Matlab.zip} archive you will have \texttt{01 - Matlab/code} folder in it. I suggest you point Matlab to that folder.\\
 
 The main part of the screen occupies the command line, where you can run you commands. The second essential part of the Matlab is a text editor (which is not shown in default layout). There are also such panels as command log, list of variables in your current workspace and file browser. You can realign the panels to your own liking. The most common way to do work in Matlab is to write you code in editor and sometimes run and test it in the command line.\\
+
+The free alternative to Matlab is called Octave\footnote{Windows: \url{http://wiki.octave.org/Octave_for_Windows} (take the first option: MXE Builds), Mac: \url{http://wiki.octave.org/Octave_for_MacOS_X} (take the binary installer), Linux: distribution packages.}. You can see it on the Figure \ref{fig:octavegui} and there are similar panels available: file browser, list of variables, command history and the command line.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=1\textwidth]{octave.png} 
+   \caption{Octave main window}
+   \label{fig:octavegui}
+\end{figure}
+
+Some of the functions in Octave are require installing additional packages to use them (somewhat like Matlab Toolboxes). Here is the list of available packages: \url{http://octave.sourceforge.net/packages.php} and here are the instructions how to install: \url{https://www.gnu.org/software/octave/doc/interpreter/Installing-and-Removing-Packages.html}. We well need  \texttt{io} and \texttt{statistics} packages for this tutorial. Once installed a packed has to loaded by calling \texttt{pkg load package\_name}.\\
 
 Now you are all set and we briefly go through basic things you do in any programming language. Read the code and run the pieces which are not immediately clear.
 
@@ -119,7 +130,7 @@ v = [1, 2, 3, 4, 5];
 >> B'
 
 % You can also have matrixes with more dimensions than two
->> M = repmat(magic(3), 2, 3, 4, 5);
+>> M = repmat(magic(3), [2, 3, 4, 5]);
 % will produce a 4D matrix of size
 >> size(M)
 ans =     6     9     4     5
@@ -169,7 +180,7 @@ end
 % it can also go over elements in a variable (the 'foreach' behaviour)
 C = {'here', 'we', 'add', [1, 2, 3, 4, 5], 'whatever we like', 5};
 for c = C
-  disp(c)
+  disp(c{1})
 end
 
 % the WHILE loop is also available
@@ -191,7 +202,7 @@ disp(total)
 total = sum([1:100] .^ 2)
 \end{lstlisting}
 
-You will see weird functions now and then, like this \texttt{sum} in the last example. And you may wonder \emph{what does it do exactly?}. To answer that there is a Matlab documentation \url{http://se.mathworks.com/help/} where you can enter \texttt{sum} and read all about it. Or just Google "matlab sum".
+You will see weird functions now and then, like this \texttt{sum} in the last example. And you may wonder \emph{what does it do exactly?}. To answer that there is a Matlab documentation \url{http://se.mathworks.com/help/} where you can enter \texttt{sum} and read all about it. Or just Google "matlab sum" or "octave sum"
 
 \begin{lstlisting}[caption = {Creating a function, file \texttt{dothings.m}}]
 % Each function in Matlab lives in a separate file (you can have several
@@ -200,7 +211,7 @@ You will see weird functions now and then, like this \texttt{sum} in the last ex
 % a separate file 'dothings.m'
 
 % Matlab function can return several values
-function [s, d, p, q] = add(a, b)
+function [s, d, p, q] = dothings(a, b)
   s = a + b;
   d = a - b;
   p = a * b;
@@ -318,7 +329,7 @@ Load the \texttt{erptrials.csv} dataset as described in Listing \ref{lst:data}. 
 % Exercise 3
 %
 \begin{exercise}{3}{Plotting}{1}
-Create a plot of 17th row (all columns) of our \texttt{erpdata} dataset. Whenever you produce a plot make sure that it is explained what your plot demonstrates. Go through \texttt{plot} function documentation \footnote{\url{http://se.mathworks.com/help/matlab/ref/plot.html}} and make the following changes to your plot:
+Create a plot of 17th row (all columns) of our \texttt{erpdata} dataset. Whenever you produce a plot make sure that it is explained what your plot demonstrates. Go through \texttt{plot} function documentation \footnote{\url{http://se.mathworks.com/help/matlab/ref/plot.html}}\footnote{\url{https://www.gnu.org/software/octave/doc/interpreter/Two_002dDimensional-Plots.html}} and make the following changes to your plot:
 \begin{itemize}
     \item Add caption, so that everybody would know what this plot is about
     \item Set X-axis label (try to guess what it is or come up with something)
