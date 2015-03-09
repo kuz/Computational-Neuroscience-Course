@@ -74,7 +74,7 @@ Your task is to perform Fourier analysis on both datasets, plot power spectra an
 	\item For each recorded signal (2048 data points):
 		\begin{enumerate}
 			\item Use \texttt{fft(signal)} to compute power spectrum of this signal. You will get a vector of complex numbers.
-			\item Use \texttt{abs(result\_of\_fft)} to obtain the magnitude\footnote{\url{http://www.mathworks.se/help/matlab/ref/abs.html}}.
+			\item Use \texttt{abs(result\_of\_fft)} to obtain the magnitude\footnote{\url{http://www.mathworks.se/help/matlab/ref/abs.html}}. \texttt{abs(result\_of\_fft)}$^2$ will give you power.
 		\end{enumerate}
 	\item Sum together 15 power spectrum distributions, that you got from the previous step.
 	\item And divide the resulting vector by 15 to obtain the average.
@@ -91,7 +91,7 @@ xaxis = (0:df:fNQ-df);  % points for your X axis, should be of the same length
 		\end{verbatim}
 	\item And plot it again
 		\begin{verbatim}
-		plot(xaxis, powers);
+		plot(xaxis, powers_average);
 		\end{verbatim}
 		Now your axis goes from 0 to 256 (or 512) with step of 4, which corresponds to the frequency range \texttt{pow} function produced.
 \end{enumerate}
@@ -109,7 +109,7 @@ After making the plot more beautiful and focusing on the range from 0 to 30 Hz y
 % Epilepsy
 %
 \begin{exercise}{3}{Epilepsy}{2}
-In the folder \texttt{data/epilepsy} you have two data files: \texttt{sz4\_pre.dat} and \texttt{sz4\_ict.dat}. This data was recorded using ECoG\footnote{http://en.wikipedia.org/wiki/Electrocorticography} array. The file with the suffix \texttt{\_pre} is recorded before the seizure and the \texttt{\_ict} file is recorded during the epilepsy seizure. Read the \texttt{README.txt} file for the description of the data. Your task is to perform Fourier analysis on both files and see how brain activity changes during the epilepsy seizure.
+In the folder \texttt{data/epilepsy} you have two data files: \texttt{sz4\_pre.dat} and \texttt{sz4\_ict.dat}. This data was recorded using ECoG\footnote{http://en.wikipedia.org/wiki/Electrocorticography} array. The file with the suffix \texttt{\_pre} is recorded before the seizure and the \texttt{\_ict} file is recorded during the epilepsy seizure. Read the \texttt{README.txt} file for the description of the data. Your task is to perform Fourier analysis on both files and see how brain activity changes during the epilepsy seizure. Speculate what is the nature of the peak around 60Hz.
 \paragraph{Hint.} Reuse the code from the previous exercise.
 \paragraph{Hint.} The data has readings from the 76 electrodes. First make Fourier transform on each of them separately, then compute the power spectra (each one separately) and then compute the average and plot that.
 \end{exercise}
