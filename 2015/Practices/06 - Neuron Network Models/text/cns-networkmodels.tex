@@ -1,0 +1,146 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{pst-plot}
+\usepackage{graphicx}
+\usepackage{endnotes}
+\usepackage{graphics}
+\usepackage{floatflt}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{pdflscape}
+ \usepackage{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0 0}}
+
+\pdfpagewidth 210mm
+\pdfpageheight 297mm 
+\setlength\topmargin{0mm}
+\setlength\headheight{0mm}
+\setlength\headsep{0mm}
+\setlength\textheight{250mm}	
+\setlength\textwidth{159.2mm}
+\setlength\oddsidemargin{0mm}
+\setlength\evensidemargin{0mm}
+\setlength\parindent{7mm}
+\setlength\parskip{0mm}
+
+\newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
+\medskip}
+\newcommand{\question}[2]{\setlength\parindent{0mm}\ \\$\mathbf{Q_{#1}:}$ #2\ \\}
+
+\author{\large{Ilya Kuzovkin, Raul Vicente}}
+\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Neuron Network Models}}
+
+\begin{document}
+\maketitle
+
+
+%
+% Intro
+%
+\ \\
+On the lecture we have seen through one example of a neural network model. It was based on a real article and real research. This time your task will be to read another article and extract pieces of knowledge form it. 
+
+\ \\
+\textbf{Request:} Please record the time you will spend of this homework and add it to the report. This is just for me to balance the amount and the difficulty level of the exercises.
+
+\ \\
+The difference between a scientific article and most of the other texts is that in an article almost every sentence has a meaning. This is why reading an article is harder than reading any other text: you have to digest a sentence before you move on. As a result you will need to read it slower and several times (2-3). I suggest you do it like this:
+\begin{enumerate}[label=\alph*)]
+	\item First read the whole text skipping the technical details. The idea of this first run it to get the feeling of the article as a whole: general pipeline, research objective, something about methodology, results, etc.
+	\item Once you have the general idea why those people wrote an article you can do the second read, aiming at understanding the methods they use: equations, the data, experimental setup, performance measures, the exact meaning of the results. There will be a lot of terms you are not familiar with -- look them up online.
+	\item By now you have pretty decent understanding what is going on there. However when you'll think about particulars you will feel that you don't quite get them. So you perform a third read, maybe focusing on the pieces of text you are interested in.
+\end{enumerate}
+
+%
+% Read an article
+%
+\begin{exercise}{1}{\textit{``A Model of Binocular Rivalry Based on Competition in IT"}}{4}
+Download an article from the practice session web page: \url{https://courses.cs.ut.ee/2014/neuro/spring/uploads/Main/binocular_model.pdf}. Understand it and answer the questions below. The answers you give should be \textbf{detailed and explanatory}: imagine that you have to explain those things in details to your classmate who knows nothing about neuroscience.
+
+\ \\
+Note that there might be a couple of questions, which are not explicitly answered in the article. If you encounter one of those you can either tell what do you thing the answer might be or report that this information is not given in the article.
+
+\question{1}{Explain the title of the article.}
+\question{2}{What is the scientific question raised in this article?}
+\question{3}{Enlist and describe the experimental findings which are mentioned in the article and which are relevant to the scientific question.}
+\question{4}{Part of which area of the brain we are going to model? Why this area is relevant to the scientific question?}
+\question{5}{Explain in general terms what does the equation (1) do?}
+\question{6}{How do they model noise?}
+\question{7}{What Figure 2.A is trying to convey?}
+\question{8}{What types of neurons (nodes) does the model have? How those neurons (nodes) behave?}
+\question{9}{What is the topology of the network (random, layers, lattice, ...)? What is the logic behind it?}
+\question{10}{On the top of Figure 1 we have a box called "inhibitor". What is its role?}
+\question{11}{What is the firing rate adaptation and what is its role in the big picture?}
+\question{12}{What do they say about the size of the network?}
+\question{13}{What do they say about the density of the network?}
+\question{14}{Describe the connections between the units (strength, delay, ...)}
+\question{15}{How do they model the input to the network?}
+\question{16}{Summarize the the meaning of the model and why it might be useful.}
+
+\end{exercise}
+
+
+%
+% Discuss
+%
+\begin{exercise}{2}{The Human Brain Project \& The Brain Initiative}{1}
+The two most prominent ongoing brain projects are The Human Brain Project (\url{https://www.humanbrainproject.eu}) and The Brain Initiative (\url{http://www.nih.gov/science/brain/index.htm}). Go through their websites and compose an overview about each of them. It can include the points like:
+\begin{itemize}
+\itemsep 0em
+	\item What is the goal of the project?
+	\item When is has started?
+	\item What have they promised to deliver?
+	\item When is the deadline?
+	\item What is the value of the results they will produce?
+	\item Is the field of neuroscience ``done" once those projects are complete?
+	\item Any other information you will find interesting.
+\end{itemize}
+In the end you should produce an informative story about the projects, which will allow the listener to grasp the ideas, the goals and the promises behind those two projects.
+\end{exercise}
+
+
+%
+% Bonus
+%
+\begin{exercise}{3*}{Find \& run an implementation of some neuron network model}{2}
+Have a look at this page \url{https://senselab.med.yale.edu/ModelDB}. This a database with a huge amount of implementations of different models. Your task it to:
+\begin{enumerate}[label=\alph*)]
+	\item Find a network model (not a single neuron) which you like. You can just click around there or look at some specific lists:
+		\begin{itemize}
+			\item By topic: \url{https://senselab.med.yale.edu/ModelDB/FindByConcept.asp}
+			\item Only networks: \url{https://senselab.med.yale.edu/MicroCircuitDB/ListByModelName.asp?c=19&lin=-1}
+			\item Matlab implementations: \url{https://senselab.med.yale.edu/ModelDB/ModelList.asp?id=36835}
+			\item etc...
+		\end{itemize}
+	\item Explain in the report what is the model about.
+	\item Run the code, report one (or more) figures and tell what these figures show.
+\end{enumerate}
+\end{exercise}
+
+
+\ \\
+\ \\
+\ \\
+\ \\
+\ \\
+Please submit a \texttt{pdf} report with answers to the questions and comments about your solutions. Include figures, explanations and essential pieces of code. Do not include the code itself as a separate file, your report should give good understanding of what you have done. Please mark how long it took to complete this set of exercises. Upload the \texttt{pdf} to the practice session page on the course website.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
