@@ -7,8 +7,14 @@ bad_y = [];
 for i = 1:10
     x = test_x((groundtruth == i & groundtruth ~= predictions), :);
     y = predictions((groundtruth == i & groundtruth ~= predictions), :);
-    bad_x = [bad_x; x(1:10, :)];
-    bad_y = [bad_y; y(1:10)];
+    num_bad = size(x, 1);
+    if num_bad < 10
+        bad_x = [bad_x; x; zeros(10 - num_bad, size(x, 2))];
+        bad_y = [bad_y; y; zeros(10 - num_bad, 1)];
+    else
+        bad_x = [bad_x; x(1:10, :)];
+        bad_y = [bad_y; y(1:10)];
+    end
 end
 
 % visualize misclassified digits (have to denormalize them first)
