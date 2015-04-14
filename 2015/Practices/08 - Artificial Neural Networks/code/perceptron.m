@@ -5,12 +5,16 @@
 clear;
 more off;
 
+% use Gnuplot for plotting in Octave
+%graphics_toolkit gnuplot;
+
 % load the dataset
 load ../data/dataset1;
 % plot the dataset:
 % - blue crosses are positive examples (target = 1)
 % - green circles are negative examples (target = 0)
 plot_perceptron(data, targets);
+disp('Press any key to continue');
 pause;
 
 % store number of samples and weights for convenience
@@ -44,7 +48,7 @@ for k=1:20
 
     % number of errors - where result didn't match target
     num_errors = sum(y ~= t);
-    disp(['num_errors = ' num2str(num_errors)]);
+    disp(['num_errors = ' num2str(num_errors) ' (press any key to continue)']);
     pause;
 
     % collect error history

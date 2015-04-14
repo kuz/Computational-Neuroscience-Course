@@ -5,6 +5,9 @@
 clear;
 more off;
 
+% use Gnuplot for plotting in Octave
+%graphics_toolkit gnuplot;
+
 % define input range and number of samples
 range_start = -2*pi;
 range_end = 2*pi;
@@ -17,6 +20,7 @@ step = (range_end - range_start) / (num_samples - 1);
 train_x = [range_start:step:range_end]';
 train_y = sin(train_x) + 0.1 * randn(size(train_x));    % add some noise
 plot_sinusoid(train_x, train_y);
+disp('Press any key to continue');
 pause;
 
 % add DeepLearnToolbox folder to function search path
@@ -68,7 +72,7 @@ ylim([0 max(loss(100:end))]);
 
 % Q2: What is the minimum number of hidden nodes to approximate sinusoid 
 %     with four bumps (like in the example)? Include figure with your 
-%     report. I’m asking for occasional (or theoretical) possibility,
+%     report. I'm asking for occasional (or theoretical) possibility,
 %     not that it approximates reliably with that many hidden nodes. 
 %     Bonus: why that might be? Following function might give you some
 %     hints - plot_sinusoid_components(test_x, nn).

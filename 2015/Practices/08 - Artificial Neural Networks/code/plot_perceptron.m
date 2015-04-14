@@ -20,13 +20,13 @@ clf;
 hold on;
 
 % plot positive examples classified correctly as blue crosses
-scatter(pos_data_correct(:,1), pos_data_correct(:,2), 'b', '+');
+scatter(pos_data_correct(:,1), pos_data_correct(:,2), 20, 'b', '+');
 % plot positive examples classified incorrectly as red crosses
-scatter(pos_data_incorrect(:,1), pos_data_incorrect(:,2), 'r', '+');
+scatter(pos_data_incorrect(:,1), pos_data_incorrect(:,2), 20, 'r', '+');
 % plot negative examples classified correctly as green circles
-scatter(neg_data_correct(:,1), neg_data_correct(:,2), 'g', 'o');
+scatter(neg_data_correct(:,1), neg_data_correct(:,2), 20, 'g', 'o');
 % plot negative examples classified incorrectly as red circles
-scatter(neg_data_incorrect(:,1), neg_data_incorrect(:,2), 'r', 'o');
+scatter(neg_data_incorrect(:,1), neg_data_incorrect(:,2), 20, 'r', 'o');
 
 % if weights were given, plot decision boundary
 if exist('weights','var')
