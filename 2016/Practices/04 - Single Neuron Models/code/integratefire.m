@@ -164,7 +164,7 @@ for trial = 1:10
         end
         voltage(trial, t+1) = voltage(trial, t) + dt*(I/C) + noise*sqrt(dt)*randn;
     end
-    
+    I=0;
     for t = 4001:5001
         if voltage(trial, t) > Vth
             voltage(trial, t) = Vinit;
