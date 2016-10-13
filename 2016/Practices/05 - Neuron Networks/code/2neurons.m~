@@ -1,0 +1,129 @@
+% Author: Ardi Tampuu, University Of Tartu
+%
+% Session: Single Neuron Models
+% Exerise on Integrate and Fire with synapses
+% Spike currents adopted from http://math.bu.edu/people/mak/MA665 course materials
+%
+%
+%
+
+%%%%%%%%%%%%%%%%
+
+clear all
+clf
+
+T = 0.5; %duration of simulation in sec
+dt=0.001;
+number_of_steps = T/dt
+
+
+%Neuron Parameters
+%----------
+I_const = 50.0; % we are looking into synapses, so no injected current
+C = 0.1; % capacity
+R = 1; % resistance
+
+Vr =  -75.0; % reset potential in mV
+V0 = -70.0; % resting potential in mV
+
+spike_strength = -100.0; % this will modify how strong the effect of spikes are
+                       %%% TODO 1.3 %%% increase the strength. 
+                       % !!NB!! set it back to 70 afterwards!!
+
+tc = -100000; 
+th = -55.0; %the neuron threshold
+taus = 5; % this defines the shape of the spike (how long the tail is)
+          %%% TODO 1 %%% relate it to the I_syaptic shape
+
+
+%Vm = ones(number_of_steps,1)*-70.0; %membrane potential
+
+
+
+
+n_neurons = 2
+seps = [0 0];
+last_spike = [-100 -100];
+connectivity = [0 1;1 0]
+spikes = zeros(T/dt,2);
+Vm = zeros(T/dt,2);
+Vm(1,:) = [V0 V0-10];
+I_syn(1,:) = [0 0];
+
+for i=2:(number_of_steps-1)
+   for n=1:n_neurons
+        if(Vm(i-1,n) >= th)   %generate spike
+          disp("generated spike")
+          last_spike(n) = i-1 %synaptic currents want to know the last output spike time		  
+          Vm(i-1,n) = Vr;
+          spikes(i-1,n) = 1;
+	end
+   end
+   
+   %The following stuff has to do with shape of incoming current caused by spikes		 
+   seps(1) = 0;
+   f = find(spikes(1:i,2)==1); #find timepoints where there was spikes in neuron 2 in the past
+   for j=1:length(f);
+      eps = 0;
+      if (last_spike(1) <= f(j) && f(j) <= i) % if time > this spike => last_output %%the last output was long time ago
+        eps = exp(-(i -f(j))/(R*C)) - exp(-(i-f(j))/taus);
+      end
+	
+      if (f(j) < last_spike(1) && last_spike(n) <= i) %if time > last_output > this_spike %%%there has been an output after our input%%% 
+          eps = exp(-(last_spike(1)-f(j))/taus)*(exp(-(i-last_spike(1))/(R*C)) - exp(-(i-last_spike(1))/taus));
+      end
+      seps(1) = seps(1) + eps; %current from spikes
+      % end of spike current calculation	
+   end
+   I_syn(i,1) = spike_strength * 1/(1-taus/(R*C))*seps(1); 
+   %i_leak = dt*(V0-Vm(i))/(R*C);
+   %i_injected = dt*I_const/C;
+   Vm(i,1) = Vm(i-1,1) + dt*(V0 - Vm(i-1,1) )/(R*C) + (dt*I_const/C) + spike_strength * 1/(1-taus/(R*C))*seps(1);
+   
+
+   seps(2) = 0;
+   f = find(spikes(1:i,1)==1); #find timepoints where there was spikes in neuron 2 in the past
+   for j=1:length(f);
+      eps = 0; % initialize the syn current %%%%SHOULDNT THIS BE OUTSIDE??
+      if (last_spike(2) <= f(j) && f(j) <= i) % if time > this spike => last_output %%the last output was long time ago
+        eps = exp(-(i -f(j))/(R*C)) - exp(-(i-f(j))/taus);
+      end
+	
+      if (f(j) < last_spike(2) && last_spike(n) <= i) %if time > last_output > this_spike %%%there has been an output after our input%%% 
+          eps = exp(-(last_spike(2)-f(j))/taus)*(exp(-(i-last_spike(2))/(R*C)) - exp(-(i-last_spike(2))/taus));
+      end
+      seps(2) = seps(2) + eps; %current from spikes
+      % end of spike current calculation	
+   end
+   I_syn(i,2) = spike_strength * 1/(1-taus/(R*C))*seps(2); 
+   %i_leak = dt*(V0-Vm(i))/(R*C);
+   %i_injected = dt*I_const/C;
+   Vm(i,2) = Vm(i-1,2) + dt*(V0 - Vm(i-1,2) )/(R*C) + (dt*I_const/C) + spike_strength * 1/(1-taus/(R*C))*seps(2);
+   	
+
+end 
+
+%%% TODO 1 %%% uncomment the lines below and plot the shape of synaptic current in time
+%t = (1:length(Vm)-1);
+%plot(t, I_syn);
+%xlim([290.0,350.0])
+%pause 
+
+%%% TODO always%%%
+%plot membrane potential vs time
+t = (1:length(Vm(:,1)));
+plot(t, Vm(:,1));
+ylim([-80.0,-50.0])
+
+xlabel('time [ms]');
+ylabel('Vm(t)  [mV]')  
+
+hold on
+
+%plot membrane potential vs time
+t = (1:length(Vm(:,1)));
+plot(t, Vm(:,2), 'color','r');
+
+hold off
+
+
