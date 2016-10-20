@@ -1,0 +1,73 @@
+% Function approximation example, inspired by this Java applet:
+% http://neuron.eng.wayne.edu/bpFunctionApprox/bpFunctionApprox.html
+
+% clear workspace and switch off paging in Octave
+clear;
+more off;
+
+% use Gnuplot for plotting in Octave
+%graphics_toolkit gnuplot;
+
+load ../data/rat_data;
+
+[train_X,train_Y,test_X,test_Y] = splitdata(spikes, coords, 0.8);
+train_X=train_X(1:10100,:);
+train_Y=train_Y(1:10100,:);
+test_X=test_X(1:2500,:);
+test_Y=test_Y(1:2500,:);
+disp(size(train_X))
+disp(size(train_Y))
+% add DeepLearnToolbox folder to function search path
+addpath(genpath('DeepLearnToolbox'));
+
+
+% set up neural network
+nn = nnsetup([71 1000 2]);             % One input, one output, ten hidden nodes
+nn.activation_function = 'sigm';    % Use sigmoid activation function
+nn.learningRate = 0.1;              % Learning rate
+nn.momentum = 0.9;                  % Momentum
+nn.output = 'linear';               % Outputs are two real values
+
+
+disp('Press any key to continue');
+pause;
+
+
+% loop to animate learning
+loss = [];
+for k = 1:10
+    % set up training parameters
+    opts.batchsize = 100;       % Entire dataset is a batch
+    opts.numepochs = 10;        % Initially train shorter time
+                                             % to make animation more interesting
+    %randomize the order of samples
+    random_o = randperm(length(train_Y));
+    % train the network
+    [nn, L] = nntrain(nn, train_X(random_o,:), train_Y(random_o,:), opts);
+    % collect loss
+    loss = [loss; L];
+
+    % use fine-grained range for testing
+    test_x = [-4*pi:0.1:4*pi]';
+    % calculate prediction on testing range
+    pred_y = nnpredict2(nn, test_X);
+    disp(size(pred_y))
+    
+    % pause 50ms for animation
+    disp(loss(end))
+    pause(1);
+end
+
+
+%This would plot the contributions of each hidden node - how much is the output*weight that 
+%  this node sends to the output fro any given x.
+%plot_sinusoid_components(test_x, nn)  
+
+% plot loss
+figure;
+plot(loss);
+title('Evolution of loss during learning');
+xlabel('Training Epoch nr');
+ylabel('Loss on training set');
+ylim([0 max(loss(100:end))]);
+
