@@ -5,7 +5,7 @@ This repository contains materials and codebase for the Computation Neuroscience
 https://courses.cs.ut.ee/2015/neuro/spring/Main/HomePage
 2018
 ----
-The homeworks are not final until the due time to issue each homework.
+The homeworks are not final until the due time to issue each homework. 
 
 2015
 ----
