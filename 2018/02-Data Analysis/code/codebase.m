@@ -15,7 +15,7 @@ for n = 1:72
     
     % load the data file and store it in the data structure under the
     % number n
-    data{end + 1} = load(['data/lgn/matlab/mlgnori_' sprintf('%02d', n) '.mat']);
+    data{n + 1} = load(['data/lgn/matlab/mlgnori_' sprintf('%02d', n) '.mat']);
     
 end
 
