@@ -15,7 +15,7 @@ for n = 1:72
     
     % load the data file and store it in the data structure under the
     % number n
-    data{n + 1} = load(['data/lgn/matlab/mlgnori_' sprintf('%02d', n) '.mat']);
+    data{n + 1} = load(['../data/lgn/matlab/mlgnori_' sprintf('%02d', n) '.mat']);
     
 end
 
@@ -29,7 +29,7 @@ end
 
 % from the data for the neuron number 5 we take variable spktimes
 % it is a 3D matrix, we take 3rd stimiulus and trial number 8
-spikes = data{5}.mlgn.spktimes(3,8,:);
+spikes = data{5}.mlgn.spktimes(3,5,:);
 
 % have a look at the size of the resulting variable: it is still a 3D matrix
 size(spikes)
