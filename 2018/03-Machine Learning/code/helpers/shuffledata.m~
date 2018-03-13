@@ -1,0 +1,7 @@
+%
+% Shuffle a dataset
+%
+function [features, labels] = shuffledata(features, labels)
+newidx = randperm(length(labels));
+labels = labels(newidx);
+features = features(newidx, :);

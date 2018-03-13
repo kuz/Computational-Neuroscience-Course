@@ -1,0 +1,31 @@
+%
+% Produce a balanced dataset
+%
+function [features, labels] = balancedata(features, labels, downsample = false)
+
+minamount = min(hist(labels, length(unique(labels)))); %returns the number of samples in the least populated class
+maxamount = max(hist(labels, length(unique(labels)))); %returns the number of samples in the least populated class
+
+disp(minamount)
+disp(maxamount)
+
+if downsample
+  for cls = unique(labels)' %for each possible class
+    clsidx = find(labels == cls); %find all rows of this class
+    shuffle = randperm(length(clsidx)); %random order to remove random datapoints
+    features(clsidx(shuffle(minamount:end)), :) = []; %only "minamount" rows are not set to be empty
+    labels(clsidx(shuffle(minamount:end)), :) = [];
+  end
+else %we oversample less populated classes
+  extended_features = ones(0,length(features(1,:)));
+  extended_labels = ones(0,1);
+  for cls = unique(labels)' %for each possible class
+    cls_idx = find(labels == cls); %find lines that correspond to this class
+    cls_idx_oversampled = cls_idx(mod(0:maxamount-1,length(cls_idx)) + 1) ;%if maxamount=120 and we have 100 samples in current class, 
+    %we take each sample once and then 20 first samples another time..
+    extended_features = [extended_features; features(cls_idx_oversampled,:)];
+    extended_labels = [extended_labels; labels(cls_idx_oversampled,:)];
+  end
+  features=extended_features;
+  labels=extended_labels;
+end
