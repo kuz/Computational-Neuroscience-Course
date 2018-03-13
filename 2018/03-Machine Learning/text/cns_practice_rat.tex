@@ -79,7 +79,7 @@ Before we continue let us go through vocabulary:
 
 
 \begin{exercise}{1.1}{Where is the rat?}{2.5}
-In this task we will try to predict in which part of space a rat is located based on its neural activity. When collecting the data some electrodes were inserted to the rat's hippocampus where neurons responsible for navigation are located. At the same time the location of the rat was tracked by a camera. I have preprocessed the data so that:
+In this task we will try to predict in which part of space a rat is located based on its neural activity. When collecting the data some electrodes were inserted to the rat's hippocampus where neurons responsible for navigation are located. At the same time the location of the rat was tracked by a camera. We have preprocessed the data so that:
 \begin{enumerate}
 \item \textbf{features} are spike counts in different neurons during a 500ms interval
 \item \textbf{class} corresponds to which of the 16 areas the rat was located during these 500ms
@@ -97,7 +97,7 @@ In this task we will try to predict in which part of space a rat is located base
 
 In the \emph{data} folder you find a file called \emph{$rat\_data.mat$}, which contains the features(spike counts from 71 neurons), the classes (which sector) and the coordinates (not used in this exercise). The same information is also available in plain text format in .txt files.
 
-Matlab and especially Octave is not the perfect tool for machine learning, so if you prefer other languages to solve this exercise, please do so. I especially recommend scikit-learn package in Python. Nevertheless, as the default language of this class is Matlab, I will provide instructions and helpful code in Matlab and not other languages.
+Matlab and especially Octave is not the perfect tool for machine learning, so if you prefer other languages to solve this exercise, please do so. We especially recommend scikit-learn package in Python. Nevertheless, as the default language of this class is Matlab, we will provide instructions and helpful code in Matlab and not other languages.
 
 Before the task you might need to install some packages such as (nan, statistics, io ...). To do that in Octave command window, hopefully the following command works:\\
 \begin{center}
