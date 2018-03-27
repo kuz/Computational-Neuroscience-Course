@@ -52,7 +52,7 @@ f = [300]; %%% TODO 1 %%% In the first task the neuron receives just one spike.
 %f = [50 100 150 200 250 300 350 400 450 500 550]; %the spike times of the presynaptic neuron(s)
            %%% TODO 2 %%% (set the spike strenght back to 70.0) Plot the behaviour. Describe what happens. 
            % Why does the neuron not spike even though it receives plenty of incoming spikes?
-%f = [100 101 t3]; %%% TODO 3 %%% Find the lowest possible t3 so that the postsynaptic neuron would spike.
+%f = [100 101 t3]; %%% TODO 3 %%% Find the lowest possible t3 so that the postsynaptic neuron would not spike.
 
 
 seps = 0;
