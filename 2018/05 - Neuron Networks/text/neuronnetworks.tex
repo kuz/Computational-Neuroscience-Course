@@ -1,0 +1,178 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{pst-plot}
+\usepackage{graphicx}
+\usepackage{endnotes}
+\usepackage{graphics}
+\usepackage{floatflt}
+\usepackage{wrapfig}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{pdflscape}
+ \usepackage{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{pdfborder={0 0 0 0}}
+
+\pdfpagewidth 210mm
+\pdfpageheight 297mm 
+\setlength\topmargin{0mm}
+\setlength\headheight{0mm}
+\setlength\headsep{0mm}
+\setlength\textheight{250mm}	
+\setlength\textwidth{159.2mm}
+\setlength\oddsidemargin{0mm}
+\setlength\evensidemargin{0mm}
+\setlength\parindent{7mm}
+\setlength\parskip{0mm}
+
+\newenvironment{exercise}[3]{\paragraph{Exercise #1: #2 (#3pt)}\ \\}{
+\medskip}
+\newcommand{\question}[2]{\setlength\parindent{10mm}\ \\$\mathbf{Q_#1:}$ #2\ \\}
+
+\author{\large{Aqeel Labash, Daniel Majoral, Raul Vicente}}
+\title{\huge{Introduction to Computational Neuroscience}\\\LARGE{Practice on Networks of Neurons}}
+
+\begin{document}
+\maketitle
+
+\textbf{A request:} Please track how long it will take to complete this set of exercises. Add this time to your final report.
+\ \\
+
+\textbf{NOTE:} You will probably need Matlab/Octave for this homework (unless you want to rewrite the code in another language). But there is no coding involved - just replace a value here and there and describe what you see.\\
+\ \\
+\ \\
+%
+% Intro
+%
+In this session we will have a brief look on how neurons behave if we make them interact with each other. For this purpose we use the integrate-and-fire neuron with leak currents and synaptic currents, which was already part of the homework last week. This time I have written lots of new code for you to run and explore. You will need to change parameters here and there and draw conclusions from what you see. As there is no coding demanded, the answers and analysis are expected to be thorough. (\textbf{HINT} if you are not sure about an effect or tendency, you are free to run more simulations -with different parameter values- than you are asked to)
+
+\ \\
+
+%
+% Two neurons
+%
+\begin{exercise}{1.1}{Two neurons. \\Part I: competition}{1.5}
+In the lecture you saw microcircuits (canonical circuits) consisting of three neurons - depending on how the neurons were connected to each other, these triplets gave rise to different behaviours.In this task we will model a very similar thing, but with only 2 neurons. The effect of a third neuron is replaced by injected currents.
+
+\textbf{Description of neurons} We have two \textbf{identical neurons} that both receive \textbf{the same amount} of constant input $(I_{injected})$, the ion pumps in their membranes also give rise to $I_{leak}$. Importantly, they also receive input from the other neuron, summarized in the current $I_{syn}$. Starting from the second TODO, we make our neurons also targets of noise-currents (that can be both negative and positive) $I_{noise}$. In all, the 4 types of currents sum up to give rise to the changes in the membrane potential.
+
+As you know already from earlier lectures, the synaptic interactions between neurons can be of excitatory or inhibitory nature. We will first take a look at the case where the neurons inhibit each other. That means neuron A has an inhibitory synapse on the dendrites of neuron B and vice versa. 
+
+Every time neuron A reaches threshold, an inhibitory synaptic current will flow into neuron B. This current will lower the membrane potential and reduce the chance of B firing for a period of time. As a result, neuron A might reach the threshold again (for a second time) before B even reaches the threshold for the first time. This adds further inhibition to B and makes it's firing even less probable. Eventually, even though the two identical neurons both receive the same amount of excitatory injected current, neuron B might never fire at all! Symmetrically, if it had been neuron B that fired first, it would be the neuron A that will be forever inhibited. That's why we call this configuration "competition" - the neurons compete with each other on who has the right to be active (and "the winner takes it all").\\
+------------------------
+\question{1}{ 
+\texttt{TODO:} run \texttt{competition.m} with the parameter \texttt{noise} equal to $0.0$ . \\
+Run it multiple times, so that you would see that depending on the initial membrane potential of the neurons (Vm is initialized randomly), either the first or the second neuron will become dominant. In your report you must have a plot of both cases.}
+------------------------\\
+
+
+In the above case the noise current was "turned off" and given the same starting membrane potentials the simulation would always behave exactly the same. Now let's turn the noise up a little and see how this influences the system.\\
+------------------------
+
+\question{2}{ 
+\texttt{TODO:} run \texttt{competition.m} with the parameter \texttt{noise} equal to 10.0.\\ 
+Run it multiple times. You should see that with this amount of noise, sometimes the neurons switch places during a simulation - the one that was being inhibited can become the active one. In your report add a plot from a simulation where the neurons clearly switched places. Why can this happen now that we added noise (and why it could not happen without noise)?}
+------------------------
+\question{3}{ 
+\texttt{TODO:} run \texttt{competition.m} with the parameter \texttt{noise} equal to $10.0$ \textbf{and} $params.spike\_strength = -300.0$ (the strength of inhibition).
+Run it multiple times. Why does the switch not happen any more?}
+------------------------
+\question{4}{ 
+\texttt{TODO:} run \texttt{competition.m} with the parameter \texttt{noise} equal to 50.0 \textbf{and} $params.spike\_strength = -200.0$.
+Why does the switching becomes more frequent with higher noise? Also notice that the overall behaviour is more jumpy. Add a plot to your report.}
+
+\end{exercise}
+
+\begin{exercise}{1.2}{Two neurons. Part II: oscillation}{0.5}
+In the second part of this exercise we will look at the emergence of oscillations when neuron A excites neuron B, but neuron B inhibits neuron A.
+
+In this task only neuron A receives the injected and noise currents. Neuron B will be activated only by the excitatory synaptic currents coming from its synapses with A ($A->B$). As soon as B has accumulated enough excitation and fires, neuron A will be inhibited due to the inhibitory synapse between $B->A$. This will create a pause in neuron A-s firing even though the excitatory injected current is still there.\\
+------------------------
+\question{1}{\texttt{TODO:} Run the code in $oscillation.m$.\\ Describe the behaviour you observe. How many spikes of neuron A it takes to drive neuron B to fire? How long is the pause in A's firing after B has inhibited it? Add a plot to your report.}
+------------------------
+\question{2}{ \texttt{TODO:} Double the strength and duration of the inhibitory influence - in the $oscillation.m$ you need to $params.spike\_strength=[-1000.0\ 100.0];$ and $params.taus = [30\ 2];$. Run the simulation.\\ How long is the pause in A's firing after B has inhibited it? If you notice any other changes in behaviour, report them. Add a plot to your report.}
+
+
+\end{exercise}
+
+%
+% Lateral inhibition
+%
+\begin{exercise}{2}{Lateral inhibition}{1}
+We will now study a population of 11 neurons arranged on a straight line. All neurons receive the same injected current. Each neuron inhibits its direct neighbours on the left and on the right. Therefore the neurons on the left and right edges receive inhibition from only one other neuron.\\
+------------------------
+\question{1}{Run the code in $lateral\_inh.m$.\\ It will print out the number of spikes each of the 11 neurons during 2 seconds. Run the code multiple times. Describe the pattern in the firing rates of neurons. Is this pattern there in every run? Why do you think this pattern emerges?}
+------------------------\\
+
+
+Now we will connect the neurons in a circle, not a straight line. This means the leftmost neuron is now connected to the rightmost and vice versa. This means they will receive inhibition from two other neurons like everyone else.\\
+------------------------
+
+\question{2}{Run the code in $lateral\_circle.m$.\\ It will print out the number of spikes each of the 11 neurons during 2 seconds. Run the code multiple times. There is a pattern in each individual run, but it's not the same every time. Add print outs of spike counts to the report.\\
+To run the same experiment 10 times and average the spike counts, run $lateral\_circle\_trials.m$. Is there a pattern when we average over many runs? Why does this circular connectivity behave different from linear?  Add the output to the report.}
+\end{exercise}
+
+%
+% Integrate and Fire
+%
+\begin{exercise}{3}{Border effect}{1}
+Our third and final task is to see how the lateral inhibition can enhance our ability to detect borders. In the lecture you were introduced to the concept and saw some visual illusions caused by "border enhancement".
+
+To demonstrate this phenomena we will once again use circular connectivity, this time with 15 neurons (more neurons simply to have more "space"). The major difference with previous exercise is that now neurons at positions 4-12 receive two times stronger injected input than the rest.
+
+We will first observe the neural behaviour without lateral inhibition and then compare it with the case where the inhibition is there. The goal is to see that lateral inhibition increases the difference of activity at the border of the "stimulus" (neuron 3 vs neuron 4 and 12 vs 13).\\
+------------------------
+\question{1}{First run the code in $border.m$ with $params.spike\_strength = 0.0$ (synaptic current is zero).\\ Report the spike counts of all neurons (and the plot). Report the difference between the spike count of neurons 3 and 4. Report the difference between spike counts of neurons 12 and 13.}
+------------------------\\
+\ \\
+Now we will turn on the lateral inhibition:\\
+------------------------\\
+\question{2}{Run the code in $border.m$ with $params.spike\_strength = -50.0$.\\
+Report the spike counts of all neurons and the plot. Report the difference between the count of neurons 3 and 4. Report the difference between counts of neurons 12 and 13. Describe intuitively why is the firing rate of neuron 3 lower than that of neuron 2. Why is firing rate of neuron 4 higher than that of neuron 5?}
+\end{exercise}
+
+\begin{exercise}{4}{The Human Brain Project \& The Brain Initiative}{1}
+The two most prominent ongoing brain projects are The Human Brain Project (\url{https://www.humanbrainproject.eu}) and The Brain Initiative (\url{http://www.nih.gov/science/brain/index.htm}). Go through their websites and compose an overview about each of them. It can include the points like:
+\begin{itemize}
+\itemsep 0em
+	\item What is the goal of the project?
+	\item When is has started?
+	\item What have they promised to deliver?
+	\item What have they achieved so far?
+	\item When is the deadline?
+	\item What is the value of the results they hope to eventually produce?
+	\item Is the field of neuroscience ``done" once those projects are complete?
+	\item Any other information you will find interesting.
+\end{itemize}
+In the end you should produce an informative story about the projects, which will allow the reader to grasp the ideas, the goals and the promises behind those two projects.
+\end{exercise}
+
+\begin{exercise}{5*}{Bonus}{up to 0.5}
+We take the freedom to award bonus points for the appearance of the report. Some reports are really badly formatted and hard to read. So we want to reward people who make their reports more readable and our life more pleasant.
+\end{exercise}
+
+
+\ \\
+\ \\
+\ \\
+\ \\
+
+Please submit a \texttt{pdf} report with answers to the questions and all the demanded plots. Submitting the code is demanded. The code files are not the place to answer questions, answers must also be contained in the pdf. Upload it on the practice session page on the course website.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
