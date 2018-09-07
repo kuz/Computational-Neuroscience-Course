@@ -4,9 +4,20 @@ Computational Neuroscience Course
 This repository contains materials and codebase for the Computation Neuroscience course at the Institute of Computer Science of University of Tartu.
 https://courses.cs.ut.ee/2015/neuro/spring/Main/HomePage
 
+2019
+----
+In 2019 everything will be done in jupyter notebook. We included Py3_ICNS.yml file in 2019 to help you create a conda envrionment. To import the file use the command below.
+
+```
+conda env create -f Py3_ICNS.yml
+```
+
+Notice: the homeworks are not final until the due time to issue each homework.
+
+
 2018
 ----
-The homeworks are not final until the due time to issue each homework. 
+Only 5 homeworks. Slight changes in the excersises. 
 
 2015
 ----
