@@ -6,7 +6,9 @@ https://courses.cs.ut.ee/2015/neuro/spring/Main/HomePage
 
 2019
 ----
-In 2019 everything will be done in jupyter notebook. We included Py3_ICNS.yml file in 2019 to help you create a conda envrionment. To import the file use the command below.
+In 2019 everything will be done in jupyter notebook. To make things easier we suggest using conda, you can install the it from here:https://conda.io/miniconda.html
+
+We included Py3_ICNS.yml file in `2019` folder to help you to create a conda envrionment. To import the file use the command below.
 
 ```
 conda env create -f Py3_ICNS.yml
